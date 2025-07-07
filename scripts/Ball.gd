@@ -14,6 +14,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 func _ready():
 	window_size = get_viewport_rect().size
 
+# Initialize the ball position and speed at begining and after every point.
 func new_ball():
 	position.x = window_size.x / 2
 	position.y = randi_range(200, window_size.y - 200)
