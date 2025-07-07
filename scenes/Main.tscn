@@ -1,0 +1,142 @@
+[gd_scene load_steps=12 format=3 uid="uid://cwwm10qx37a7f"]
+
+[ext_resource type="Texture2D" uid="uid://pucgh0qbmij" path="res://assets/Bg.png" id="1_nd62c"]
+[ext_resource type="FontFile" uid="uid://cwd1tkm36irny" path="res://assets/pixel_font.ttf" id="2_73nd2"]
+[ext_resource type="Script" path="res://scripts/main.gd" id="2_lynqt"]
+[ext_resource type="Script" path="res://scripts/PlayerPaddle.gd" id="3_ye62t"]
+[ext_resource type="Script" path="res://scripts/Ball.gd" id="4_eiwod"]
+[ext_resource type="Script" path="res://scripts/PlayerPaddle2.gd" id="4_pc2hq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j3wxc"]
+size = Vector2(20, 120)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a0e6j"]
+size = Vector2(10, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vs4ae"]
+size = Vector2(1152, 24)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_majne"]
+size = Vector2(1152, 24)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3h1oc"]
+size = Vector2(24, 648)
+
+[node name="Background" type="Sprite2D"]
+texture_filter = 1
+texture = ExtResource("1_nd62c")
+centered = false
+script = ExtResource("2_lynqt")
+
+[node name="PlayerPaddle" type="StaticBody2D" parent="."]
+position = Vector2(40, 300)
+script = ExtResource("4_pc2hq")
+
+[node name="ColorRect" type="ColorRect" parent="PlayerPaddle"]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -60.0
+offset_right = 20.0
+offset_bottom = 60.0
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerPaddle"]
+position = Vector2(10, 0)
+shape = SubResource("RectangleShape2D_j3wxc")
+
+[node name="CPUPaddle" type="StaticBody2D" parent="."]
+position = Vector2(1082, 300)
+script = ExtResource("3_ye62t")
+
+[node name="ColorRect" type="ColorRect" parent="CPUPaddle"]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -60.0
+offset_right = 20.0
+offset_bottom = 60.0
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CPUPaddle"]
+position = Vector2(10, 0)
+shape = SubResource("RectangleShape2D_j3wxc")
+
+[node name="Ball" type="CharacterBody2D" parent="."]
+position = Vector2(576, 324)
+collision_mask = 3
+script = ExtResource("4_eiwod")
+
+[node name="ColorRect" type="ColorRect" parent="Ball"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 5.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ball"]
+shape = SubResource("RectangleShape2D_a0e6j")
+
+[node name="Border" type="StaticBody2D" parent="."]
+collision_layer = 2
+
+[node name="Top" type="CollisionShape2D" parent="Border"]
+position = Vector2(576, -12)
+shape = SubResource("RectangleShape2D_vs4ae")
+
+[node name="Bottom" type="CollisionShape2D" parent="Border"]
+position = Vector2(576, 660)
+shape = SubResource("RectangleShape2D_majne")
+
+[node name="ScoreCPU" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ScoreCPU"]
+position = Vector2(-12, 324)
+shape = SubResource("RectangleShape2D_3h1oc")
+
+[node name="ScorePlayer" type="Area2D" parent="."]
+position = Vector2(1168, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ScorePlayer"]
+position = Vector2(-4, 324)
+shape = SubResource("RectangleShape2D_3h1oc")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="PlayerScore" type="Label" parent="HUD"]
+offset_left = 456.0
+offset_top = 5.0
+offset_right = 496.0
+offset_bottom = 37.0
+theme_override_fonts/font = ExtResource("2_73nd2")
+theme_override_font_sizes/font_size = 32
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CPUScore" type="Label" parent="HUD"]
+offset_left = 648.0
+offset_top = 5.0
+offset_right = 688.0
+offset_bottom = 37.0
+theme_override_fonts/font = ExtResource("2_73nd2")
+theme_override_font_sizes/font_size = 32
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BallTimer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[connection signal="body_entered" from="ScoreCPU" to="." method="_on_score_cpu_body_entered"]
+[connection signal="body_entered" from="ScorePlayer" to="." method="_on_score_player_body_entered"]
+[connection signal="timeout" from="BallTimer" to="." method="_on_ball_timer_timeout"]
