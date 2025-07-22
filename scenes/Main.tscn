@@ -1,11 +1,16 @@
-[gd_scene load_steps=12 format=3 uid="uid://cwwm10qx37a7f"]
+[gd_scene load_steps=14 format=3 uid="uid://cwwm10qx37a7f"]
 
 [ext_resource type="Texture2D" uid="uid://pucgh0qbmij" path="res://assets/Bg.png" id="1_nd62c"]
 [ext_resource type="FontFile" uid="uid://cwd1tkm36irny" path="res://assets/pixel_font.ttf" id="2_73nd2"]
 [ext_resource type="Script" path="res://scripts/main.gd" id="2_lynqt"]
 [ext_resource type="Script" path="res://scripts/PlayerPaddle.gd" id="3_ye62t"]
 [ext_resource type="Script" path="res://scripts/Ball.gd" id="4_eiwod"]
+[ext_resource type="Texture2D" uid="uid://dchu641ohug63" path="res://assets/sprites.png" id="4_kmrj7"]
 [ext_resource type="Script" path="res://scripts/PlayerPaddle2.gd" id="4_pc2hq"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cr675"]
+radius = 16.0
+height = 144.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j3wxc"]
 size = Vector2(20, 120)
@@ -32,19 +37,17 @@ script = ExtResource("2_lynqt")
 position = Vector2(40, 300)
 script = ExtResource("4_pc2hq")
 
-[node name="ColorRect" type="ColorRect" parent="PlayerPaddle"]
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -60.0
-offset_right = 20.0
-offset_bottom = 60.0
-grow_vertical = 2
-metadata/_edit_use_anchors_ = true
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerPaddle"]
-position = Vector2(10, 0)
-shape = SubResource("RectangleShape2D_j3wxc")
+position = Vector2(24, -4)
+shape = SubResource("CapsuleShape2D_cr675")
+
+[node name="Sprite2D" type="Sprite2D" parent="PlayerPaddle"]
+position = Vector2(8, -76)
+scale = Vector2(3.2, 1.3211)
+texture = ExtResource("4_kmrj7")
+centered = false
+region_enabled = true
+region_rect = Rect2(19.9136, 20.6785, 10.2716, 109.432)
 
 [node name="CPUPaddle" type="StaticBody2D" parent="."]
 position = Vector2(1082, 300)
