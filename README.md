@@ -4,6 +4,9 @@ The very first steps to learn Godot and create simple games which my kid can pla
 
 I started with the [Begineer Godot tutorial](https://www.youtube.com/watch?v=Xq9AyhX8HUc) found in Youtube which is single player and adapted it to make it multi player.
 
+![Game screenshot](/Screenshots/Step1.png)
+
+
 ## Controls
 
 - Player 1: "Up" and "Down" arrows
