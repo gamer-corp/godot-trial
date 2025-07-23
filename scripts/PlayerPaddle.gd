@@ -13,8 +13,8 @@ func _ready():
 	window_height = get_viewport_rect().size.y
 	window_width = get_viewport_rect().size.x
 
-	paddle_height = $ColorRect.get_size().y
-	paddle_width = $ColorRect.get_size().x
+	paddle_height = $Sprite2D.get_rect().size.y
+	paddle_width = $Sprite2D.get_rect().size.x
 	
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.

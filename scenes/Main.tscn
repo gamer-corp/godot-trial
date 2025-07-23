@@ -1,17 +1,20 @@
-[gd_scene load_steps=12 format=3 uid="uid://cwwm10qx37a7f"]
+[gd_scene load_steps=14 format=3 uid="uid://cwwm10qx37a7f"]
 
 [ext_resource type="Texture2D" uid="uid://pucgh0qbmij" path="res://assets/Bg.png" id="1_nd62c"]
 [ext_resource type="FontFile" uid="uid://cwd1tkm36irny" path="res://assets/pixel_font.ttf" id="2_73nd2"]
 [ext_resource type="Script" path="res://scripts/main.gd" id="2_lynqt"]
 [ext_resource type="Script" path="res://scripts/PlayerPaddle.gd" id="3_ye62t"]
 [ext_resource type="Script" path="res://scripts/Ball.gd" id="4_eiwod"]
+[ext_resource type="Texture2D" uid="uid://dchu641ohug63" path="res://assets/sprites.png" id="4_kmrj7"]
 [ext_resource type="Script" path="res://scripts/PlayerPaddle2.gd" id="4_pc2hq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_57vgu"]
+size = Vector2(8, 128)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j3wxc"]
 size = Vector2(20, 120)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_a0e6j"]
-size = Vector2(10, 10)
+[sub_resource type="CircleShape2D" id="CircleShape2D_f531k"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vs4ae"]
 size = Vector2(1152, 24)
@@ -32,58 +35,45 @@ script = ExtResource("2_lynqt")
 position = Vector2(40, 300)
 script = ExtResource("4_pc2hq")
 
-[node name="ColorRect" type="ColorRect" parent="PlayerPaddle"]
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -60.0
-offset_right = 20.0
-offset_bottom = 60.0
-grow_vertical = 2
-metadata/_edit_use_anchors_ = true
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerPaddle"]
-position = Vector2(10, 0)
-shape = SubResource("RectangleShape2D_j3wxc")
+position = Vector2(28, -4)
+shape = SubResource("RectangleShape2D_57vgu")
+
+[node name="Sprite2D" type="Sprite2D" parent="PlayerPaddle"]
+position = Vector2(16, -68)
+scale = Vector2(2.4, 1.17431)
+texture = ExtResource("4_kmrj7")
+centered = false
+region_enabled = true
+region_rect = Rect2(20.7037, 20.6785, 8.59259, 108.247)
 
 [node name="CPUPaddle" type="StaticBody2D" parent="."]
 position = Vector2(1082, 300)
 script = ExtResource("3_ye62t")
 
-[node name="ColorRect" type="ColorRect" parent="CPUPaddle"]
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -60.0
-offset_right = 20.0
-offset_bottom = 60.0
-grow_vertical = 2
-metadata/_edit_use_anchors_ = true
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CPUPaddle"]
 position = Vector2(10, 0)
 shape = SubResource("RectangleShape2D_j3wxc")
+
+[node name="Sprite2D" type="Sprite2D" parent="CPUPaddle"]
+position = Vector2(11, -7.56979e-06)
+scale = Vector2(2.44444, 1.10092)
+texture = ExtResource("4_kmrj7")
+region_enabled = true
+region_rect = Rect2(70.3333, 20.2, 9.18518, 109.4)
 
 [node name="Ball" type="CharacterBody2D" parent="."]
 position = Vector2(576, 324)
 collision_mask = 3
 script = ExtResource("4_eiwod")
 
-[node name="ColorRect" type="ColorRect" parent="Ball"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -5.0
-offset_top = -5.0
-offset_right = 5.0
-offset_bottom = 5.0
-grow_horizontal = 2
-grow_vertical = 2
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ball"]
-shape = SubResource("RectangleShape2D_a0e6j")
+shape = SubResource("CircleShape2D_f531k")
+
+[node name="Sprite2D" type="Sprite2D" parent="Ball"]
+texture = ExtResource("4_kmrj7")
+region_enabled = true
+region_rect = Rect2(115.518, 15.5334, 20.025, 19.8848)
 
 [node name="Border" type="StaticBody2D" parent="."]
 collision_layer = 2
